@@ -67,12 +67,12 @@ class StandardLaneDetectionDataset(torchvision.datasets.VisionDataset):
             contents = [x.strip() for x in f.readlines()]
 
         if self.test == 2:  # Test
-            self.images = [os.path.join(self.image_dir, x + '.jpg') for x in contents]
+            self.images = [os.path.join(self.image_dir, x + '') for x in contents]
             self.masks = [os.path.join(self.output_prefix, x + self.output_suffix) for x in contents]
         elif self.test == 1:  # Val
-            self.images = [os.path.join(self.image_dir, x[:x.find(' ')] + '.jpg') for x in contents]
+            self.images = [os.path.join(self.image_dir, x[:x.find(' ')] + '') for x in contents]
             self.masks = [os.path.join(self.mask_dir, x[:x.find(' ')] + '.png') for x in contents]
         else:  # Train
-            self.images = [os.path.join(self.image_dir, x[:x.find(' ')] + '.jpg') for x in contents]
+            self.images = [os.path.join(self.image_dir, x[:x.find(' ')] + '') for x in contents]
             self.masks = [os.path.join(self.mask_dir, x[:x.find(' ')] + '.png') for x in contents]
             self.lane_existences = [list(map(int, x[x.find(' '):].split())) for x in contents]
